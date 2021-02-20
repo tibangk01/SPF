@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : jeu. 11 fév. 2021 à 01:50
+-- Généré le : sam. 20 fév. 2021 à 20:24
 -- Version du serveur :  10.4.16-MariaDB
 -- Version de PHP : 7.4.12
 
@@ -24,19 +24,35 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `requetes_visiteurs`
+-- Structure de la table `editer`
 --
 
-CREATE TABLE `requetes_visiteurs` (
-  `id_requete` int(11) NOT NULL,
-  `email_visiteur` varchar(64) NOT NULL,
-  `nom_visiteur` varchar(64) NOT NULL,
-  `sujet_requete` varchar(128) NOT NULL,
-  `contenue_requete` varchar(1024) NOT NULL,
-  `consulte_le` datetime DEFAULT NULL,
-  `consulte_par` tinyint(5) NOT NULL,
-  `repondu_le` datetime DEFAULT NULL,
-  `repondu_par` tinyint(5) NOT NULL
+CREATE TABLE `editer` (
+  `date_edition_utilisateur` datetime NOT NULL DEFAULT current_timestamp(),
+  `id_utilisateur_editeur` int(11) NOT NULL,
+  `id_utilisateur_edite` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `utilisateurs`
+--
+
+CREATE TABLE `utilisateurs` (
+  `id_utilisateur` int(11) NOT NULL,
+  `matricule_utilisateur` varchar(13) NOT NULL,
+  `photo_profil_utilisateur` varchar(128) DEFAULT NULL,
+  `nom_utilisateur` varchar(64) NOT NULL,
+  `prenom_utilisateur` varchar(64) NOT NULL,
+  `sexe_utilisateur` tinyint(1) NOT NULL,
+  `pseudo_utilisateur` varchar(64) NOT NULL,
+  `mot_de_passe_utilisateur` varchar(256) NOT NULL,
+  `email_utilisateur` varchar(128) NOT NULL,
+  `id_utilisateur_auteur_ajout` int(11) NOT NULL,
+  `date_ajout_utilisateur` datetime NOT NULL DEFAULT current_timestamp(),
+  `id_utilisateur_auteur_desactivation` int(11) DEFAULT NULL,
+  `date_desactivation_utilisateur` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -44,20 +60,20 @@ CREATE TABLE `requetes_visiteurs` (
 --
 
 --
--- Index pour la table `requetes_visiteurs`
+-- Index pour la table `utilisateurs`
 --
-ALTER TABLE `requetes_visiteurs`
-  ADD PRIMARY KEY (`id_requete`);
+ALTER TABLE `utilisateurs`
+  ADD PRIMARY KEY (`id_utilisateur`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT pour la table `requetes_visiteurs`
+-- AUTO_INCREMENT pour la table `utilisateurs`
 --
-ALTER TABLE `requetes_visiteurs`
-  MODIFY `id_requete` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `utilisateurs`
+  MODIFY `id_utilisateur` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
